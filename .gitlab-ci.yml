@@ -1,0 +1,26 @@
+
+image: gcc
+
+before_script:
+    - apt-get update --yes
+    - apt-get install --yes cmake
+    - cmake --help
+    - apt-get --yes install make
+    - make -v
+
+build-job:
+    stage:
+        build
+    script:
+        - cmake CMakeLists.txt
+        - make Makefile all
+        - cd bin/
+        - echo "Running main..."
+        - ./main_run
+        - echo "Running test..."
+        - ./main_test
+
+
+
+
+
