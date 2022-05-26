@@ -1,0 +1,17 @@
+# Add this line
+
+/.vscode/**
+
+#Игнорирование везде!
+cmake_install.cmake
+Makefile
+**/CMakeFiles/**
+*.a
+
+
+#Игнорирование ненужных файлов и папок в корневой директории
+/bin/**
+/_deps/**
+/lib/**
+
+/CMakeCache.txt
