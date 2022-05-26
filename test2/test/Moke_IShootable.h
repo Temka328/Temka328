@@ -1,8 +1,8 @@
 #pragma once
 
 #include "gmock/gmock.h"
-#include "../../src/Capabilities/IShootable.h"
-#include "../../src/Vector.h"
+#include "test2/src/IShootable.h"
+#include "test 2/src/Vector.h"
 
 class Moke_IShootable : public IShootable
 {

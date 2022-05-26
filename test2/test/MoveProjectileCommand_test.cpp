@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-#include "../Capabilities/Moke_IState.h"
-#include "../../src/headers/Commands/MoveProjectileCommand.h"
+#include "test2/src/Moke_IState.h"
+#include "test2/src/MoveProjectileCommand.h"
 
 TEST(MoveProjectileCommand_test, execute_test)
 {

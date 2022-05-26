@@ -1,10 +1,10 @@
 #pragma once
 
 #include "gmock/gmock.h"
-#include "../../src/headers/Capabilities/IVelocity.h"
-#include "../../src/headers/Vectors/Vector.h"
+#include "/test2/src/IVelocity.h"
+#include "test2/src/Vector.h"
 #include <vector>
-#include "../src/headers/operators.cpp"
+
 
 class Moke_IVelocity : public IVelocity
 {
