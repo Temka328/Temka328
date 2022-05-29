@@ -1,39 +1,40 @@
 stages:
-  - build
-  - test
-  - deploy
+  - checkFormatting
+  - cmakeAndBuild
+  - runTests
 
-build-job:
-  stage: build
+checkFormatting:
+  stage: checkFormatting
+  image: fizzyshow/clang-format-alpine
+  only:
+    - merge_requests
   script:
-    - echo "Compiling the code..."
-    - echo "Compile complete."
+    - find . -regex '.*\.\(cpp\|c\|h\)' -exec clang-format -style=file --dry-run -Werror -i {} \+
 
-test-job:
-  stage: test
+build:
+  stage: cmakeAndBuild
+  image: fizzyshow/cmake-alpine
+  artifacts:
+    untracked: true
+  only:
+    - merge_requests
   script:
-    - apt-get update 
-    - apt-get install -y libgtest-dev
-    - wget https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5.tar.gz
-    - tar -zxvf cmake-3.14.5.tar.gz
-    - cd cmake-3.14.5
-    - ./bootstrap
-    - make
-    - make install
-    - cd ..
-    - mkdir Build
-    - dir
-    - cd Build
+    - mkdir build
+    - cd build
     - cmake ..
-    - cmake --build .
-    - cd test
-    - ./g_test
+    - cmake --build . --target oraap_tests
 
-deploy-job:
-  stage: deploy
+deploy:
+  stage: runTests
+  image: fizzyshow/libgcc
+  dependencies:
+    - build
+  only:
+    - merge_requests
   script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
-
-
-
+    - cd build/test
+    - ./oraap_tests --gtest_output="xml:report.xml"
+  artifacts:
+    when: always
+    reports:
+      junit: build/test/report.xml

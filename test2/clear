@@ -1,7 +1,0 @@
-rm -R _deps/
-rm -R lib/
-rm CMakeCache.txt
-rm **/cmake_install.cmake
-rm -R **/CMakeFiles/
-rm -R CMakeFiles/
-rm **/Makefile

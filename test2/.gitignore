@@ -13,5 +13,5 @@ Makefile
 /bin/**
 /_deps/**
 /lib/**
-
+build
 /CMakeCache.txt
